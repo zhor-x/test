@@ -14,17 +14,14 @@ class Answer extends Model
         return $this->belongsTo(Question::class, 'question_id');
     }
 
-    public function translation($lang = null): ?HasOne
+    public function translation($lang = null): HasOne
     {
+        $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        $lang = $lang ?: app()->getLocale();
-        $language = Language::query()->where('country_code', $lang)->first();
+        $relation = $this->hasOne(AnswerTranslation::class, 'answer_id');
 
-        if (!$language) {
-            return null;
-        }
-
-        return $this->hasOne(AnswerTranslation::class, 'answer_id')->where('language_id', $language->id);
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 
     public function translations()

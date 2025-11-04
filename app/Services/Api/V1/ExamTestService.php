@@ -18,14 +18,14 @@ readonly class ExamTestService
         return $this->repository->getAllWithTranslations();
     }
 
-    public function getUserExamTestByUniqueId(string $uniqueId)
+    public function getUserExamTestByUniqueId(string $uniqueId, ?string $locale = null)
     {
-        return $this->repository->findByUniqueId($uniqueId);
+        return $this->repository->findByUniqueId($uniqueId, $locale);
     }
 
-    public function submitAnswer(string $uniqueId, array $data): ?UserExamTest
+    public function submitAnswer(string $uniqueId, array $data, ?string $locale = null): ?UserExamTest
     {
-        $userExamTest = $this->repository->findByUniqueId($uniqueId);
+        $userExamTest = $this->repository->findByUniqueId($uniqueId, $locale);
 
 
         if (!$userExamTest) {
@@ -62,9 +62,14 @@ readonly class ExamTestService
         });
     }
 
-    public function submitFinal(string $uniqueId): void
+    public function submitFinal(string $uniqueId, ?string $locale = null): void
     {
-        $userExamTest = $this->repository->findByUniqueId($uniqueId);
+        $userExamTest = $this->repository->findByUniqueId($uniqueId, $locale);
+
+        if (!$userExamTest) {
+            return;
+        }
+
         $userExamTest->finish_time = $userExamTest->created_at->diffInSeconds(now());
         $userExamTest->is_completed = true;
         $userExamTest->save();
@@ -98,8 +103,8 @@ readonly class ExamTestService
         return $this->repository->getByUserId($userId);
     }
 
-    public function getTestByUuId(string $testUuid)
+    public function getTestByUuId(string $testUuid, ?string $locale = null)
     {
-        return $this->repository->getTestByUuId($testUuid);
+        return $this->repository->getTestByUuId($testUuid, $locale);
     }
 }

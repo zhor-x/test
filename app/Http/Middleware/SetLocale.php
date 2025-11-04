@@ -13,9 +13,10 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         $lang = $request->route('lang');
+        $language = Language::resolveByCode($lang);
 
-        if (Language::where('country_code', $lang)->exists()) {
-            app()->setLocale($lang);
+        if ($language) {
+            app()->setLocale(strtolower($lang));
         } else {
             app()->setLocale(config('app.locale')); // fallback to default
         }

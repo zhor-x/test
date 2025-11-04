@@ -18,16 +18,14 @@ class RoadSign extends Model
     }
 
 
-    public function translation($lang = null): ?HasOne
+    public function translation($lang = null): HasOne
     {
-        $lang = $lang ?: app()->getLocale();
-        $language = Language::query()->where('country_code', $lang)->first();
+        $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        if (!$language) {
-            return null;
-        }
+        $relation = $this->hasOne(RoadSignTranslation::class, 'road_sign_id');
 
-        return $this->hasOne(RoadSignTranslation::class, 'road_sign_id')->where('language_id', $language->id);
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 
 

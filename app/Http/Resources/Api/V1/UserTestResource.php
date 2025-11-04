@@ -16,13 +16,13 @@ class UserTestResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'test_name' => $this->examTest->translation->title,
+            'test_name' => $this->examTest?->translation?->title,
             'questions' => $this->whenLoaded('examTest', function () {
                 return $this->examTest->questions->map(function ($question) {
                     return [
                         'id' => $question->pivot->id,
                         'question_id' => $question->id,
-                        'text' => $question->translation->title,
+                        'text' => $question->translation?->title,
                         'image' => $question->image,
                         'answers' => AnswerResource::collection($question->answers),
                     ];

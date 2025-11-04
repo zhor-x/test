@@ -8,15 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RoadSignCategory extends Model
 {
-    public function translation($lang = null): ?HasOne
+    public function translation($lang = null): HasOne
     {
-        $lang = $lang ?: app()->getLocale();
-        $language = Language::query()->where('country_code', $lang)->first();
+        $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        if (!$language) {
-            return null;
-        }
-        return $this->hasOne(RoadSignCategoryTranslation::class, 'road_sign_category_id')->where('language_id', $language->id);
+        $relation = $this->hasOne(RoadSignCategoryTranslation::class, 'road_sign_category_id');
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 
     public function roadSings(): HasMany

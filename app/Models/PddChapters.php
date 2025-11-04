@@ -12,15 +12,14 @@ class PddChapters extends Model
         'title',
     ];
 
-    public function translation($lang = null): ?HasOne
+    public function translation($lang = null): HasOne
     {
-        $lang = $lang ?: app()->getLocale();
-        $language = Language::query()->where('country_code', $lang)->first();
+        $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        if (!$language) {
-            return null;
-        }
-        return $this->hasOne(PddChapterTranslation::class, 'chapter_id')->where('language_id', $language->id);
+        $relation = $this->hasOne(PddChapterTranslation::class, 'chapter_id');
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 
     public function rules(): HasMany

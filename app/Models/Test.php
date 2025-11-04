@@ -13,16 +13,14 @@ class Test extends Model
 
     protected $fillable = ['duration', 'max_wrong_answers', 'is_valid'];
 
-    public function translation(): ?HasOne
+    public function translation(): HasOne
     {
-        $lang = app()->getLocale();
-        $language = Language::query()->where('country_code', $lang)->first();
+        $language = Language::resolveByCode(app()->getLocale());
+        $fallback = Language::fallback();
 
-        if (!$language) {
-            return null;
-        }
+        $relation = $this->hasOne(TestTranslation::class);
 
-        return $this->hasOne(TestTranslation::class)->where('language_id', $language->id);
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 
     public function questions(): BelongsToMany

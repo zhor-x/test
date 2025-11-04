@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Str;
 
 class Explanation extends Model
 {
@@ -22,8 +21,13 @@ class Explanation extends Model
         return $this->hasMany(ExplanationTranslation::class);
     }
 
-    public function translation(): HasOne
+    public function translation($lang = null): HasOne
     {
-        return $this->hasOne(ExplanationTranslation::class)->where('language_id', 201);
+        $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
+
+        $relation = $this->hasOne(ExplanationTranslation::class);
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 }
