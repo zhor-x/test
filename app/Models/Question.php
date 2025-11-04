@@ -26,8 +26,7 @@ class Question extends Model
 
     public function translation($lang = null)
     {
-        $lang = $lang ?: app()->getLocale();
-        $language = Language::query()->where('country_code', $lang)->first();
+        $language = Language::resolveByCode($lang ?: app()->getLocale());
 
         return $this->hasOne(QuestionTranslation::class, 'question_id', 'id')
             ->when($language, fn($q) => $q->where('language_id', $language->id));
