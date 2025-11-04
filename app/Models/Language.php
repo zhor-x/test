@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use InvalidArgumentException;
 
 class Language extends Model
 {
@@ -50,9 +51,16 @@ class Language extends Model
 
     /**
      * Apply preferred/fallback language constraints to a translation query or relation.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation  $query
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
      */
-    public static function applyTranslationScope(Builder|Relation $query, ?self $preferred, ?self $fallback = null): Builder|Relation
+    public static function applyTranslationScope($query, ?self $preferred, ?self $fallback = null)
     {
+        if (!$query instanceof Builder && !$query instanceof Relation) {
+            throw new InvalidArgumentException('Translation scope expects a Builder or Relation instance.');
+        }
+
         $builder = $query instanceof Relation ? $query->getQuery() : $query;
 
         if ($preferred && $fallback && $preferred->id !== $fallback->id) {
