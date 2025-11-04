@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="24.02.0">
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="15" family="TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="1" size="12" family="ArialMT" color="#000000"/>
+	<fontspec id="2" size="12" family="TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="3" size="12" family="BCDEEE+CambriaMath" color="#000000"/>
+	<fontspec id="4" size="17" family="ArialMT" color="#000000"/>
+	<fontspec id="5" size="18" family="TimesNewRomanPSMT" color="#000000"/>
+<image top="87" left="80" width="338" height="169" src="output-1_1.jpg"/>
+<image top="102" left="474" width="338" height="169" src="output-1_2.jpg"/>
+<image top="442" left="80" width="338" height="169" src="output-1_3.jpg"/>
+<image top="798" left="80" width="338" height="169" src="output-1_4.jpg"/>
+<text top="386" left="841" width="4" height="13" font="0"> </text>
+<text top="741" left="841" width="4" height="13" font="0"> </text>
+<text top="1097" left="841" width="4" height="13" font="0"> </text>
+<text top="61" left="66" width="325" height="13" font="1">Նշաններից ո՞րն է կոչվում «Արգելքի շրջանցումը ձախից»։ </text>
+<text top="248" left="418" width="3" height="11" font="2"> </text>
+<text top="272" left="66" width="677" height="11" font="1">1.1                                                                                                                                                                                                      </text>
+<text top="287" left="66" width="677" height="11" font="1">2.2                                                                                                                                                                                                      </text>
+<text top="302" left="66" width="677" height="11" font="1">3.3                                                                                                                                                                                                      </text>
+<text top="317" left="66" width="677" height="11" font="1">4.4                                                                                                                                                                                                      </text>
+<text top="332" left="66" width="33" height="11" font="1">5.5     </text>
+<text top="359" left="104" width="287" height="11" font="1">                                                                                      </text>
+<text top="356" left="391" width="29" height="13" font="1">Պատ</text>
+<text top="358" left="421" width="2" height="12" font="3">․</text>
+<text top="356" left="423" width="10" height="13" font="1">՝3</text>
+<text top="359" left="433" width="3" height="11" font="2"> </text>
+<text top="387" left="433" width="5" height="15" font="4"> </text>
+<text top="420" left="66" width="5" height="16" font="5"> </text>
+<text top="61" left="459" width="340" height="13" font="1">Թույլատրվու՞մ է արդյոք ավտոբուսի վարորդին մուտք գործել </text>
+<text top="75" left="459" width="205" height="13" font="1">խաչմերուկ տվյալ  իրադրությունում։ </text>
+<text top="263" left="812" width="3" height="11" font="2"> </text>
+<text top="285" left="459" width="667" height="13" font="1">1.Թույլատրվում է։                                                                                                                                                                          </text>
+<text top="300" left="459" width="666" height="13" font="1">2.Արգելվում է։                                                                                                                                                                                </text>
+<text top="314" left="459" width="345" height="13" font="1">3.Թույլատրվում է, եթե ավտոբուսը երթեւեկում է սահմանված </text>
+<text top="329" left="459" width="73" height="13" font="1">երթուղով։     </text>
+<text top="359" left="498" width="287" height="11" font="1">                                                                                      </text>
+<text top="356" left="785" width="29" height="13" font="1">Պատ</text>
+<text top="358" left="815" width="2" height="12" font="3">․</text>
+<text top="356" left="817" width="10" height="13" font="1">՝2</text>
+<text top="359" left="827" width="3" height="11" font="2"> </text>
+<text top="387" left="827" width="5" height="15" font="4"> </text>
+<text top="420" left="459" width="5" height="16" font="5"> </text>
+<text top="416" left="66" width="353" height="13" font="1">Նշված դեպքում ո՞ր գոտուց պետք է կատարվի աջ շրջադարձը։ </text>
+<text top="603" left="418" width="3" height="11" font="2"> </text>
+<text top="625" left="66" width="674" height="13" font="1">1.Միայն  երկրորդ  գոտուց։                                                                                                                                                             </text>
+<text top="640" left="66" width="335" height="13" font="1">2.Միայն  «A»  գծանշումով  նշված  աջ   եզրային  գոտուց։     </text>
+<text top="669" left="104" width="287" height="11" font="1">                                                                                      </text>
+<text top="667" left="391" width="29" height="13" font="1">Պատ</text>
+<text top="669" left="421" width="2" height="12" font="3">․</text>
+<text top="667" left="423" width="10" height="13" font="1">՝2</text>
+<text top="670" left="433" width="3" height="11" font="2"> </text>
+<text top="697" left="433" width="5" height="15" font="4"> </text>
+<text top="731" left="66" width="5" height="16" font="5"> </text>
+<text top="447" left="459" width="348" height="13" font="1">Խաչմերուկում կազմակերպված է շրջանաձեւ երթեւեկություն։ </text>
+<text top="462" left="459" width="321" height="13" font="1">Երթեւեկելի մասը, որով մոտենում  եք խաչմերուկին, ունի </text>
+<text top="477" left="459" width="320" height="13" font="1">երթեւեկության երկու գոտի։ Խաչմերուկ մուտք գործելիս` </text>
+<text top="492" left="459" width="317" height="13" font="1">շրջադարձ կատարելու համար ո՞ր գոտին եք պարտավոր </text>
+<text top="507" left="459" width="66" height="13" font="1">զբաղեցնել՝ </text>
+<text top="536" left="643" width="3" height="11" font="2"> </text>
+<text top="561" left="459" width="676" height="13" font="1">1.Աջ գոտին։                                                                                                                                                                                      </text>
+<text top="576" left="459" width="682" height="13" font="1">2.Ձախ  գոտին։                                                                                                                                                                                   </text>
+<text top="591" left="459" width="182" height="13" font="1">3.Կա՛մ աջ, կա՛մ ձախ  գոտին։     </text>
+<text top="620" left="498" width="287" height="11" font="1">                                                                                      </text>
+<text top="617" left="785" width="29" height="13" font="1">Պատ</text>
+<text top="619" left="815" width="2" height="12" font="3">․</text>
+<text top="617" left="817" width="10" height="13" font="1">՝3</text>
+<text top="620" left="827" width="3" height="11" font="2"> </text>
+<text top="648" left="827" width="5" height="15" font="4"> </text>
+<text top="681" left="459" width="5" height="16" font="5"> </text>
+<text top="771" left="66" width="321" height="13" font="1">Թույլատրվու՞մ է արդյոք մուտք գործել բակ նշված տեղից։ </text>
+<text top="959" left="418" width="3" height="11" font="2"> </text>
+<text top="981" left="66" width="667" height="13" font="1">1.Թույլատրվում է։                                                                                                                                                                          </text>
+<text top="995" left="66" width="96" height="13" font="1">2.Արգելվում է։     </text>
+<text top="1025" left="104" width="287" height="11" font="1">                                                                                      </text>
+<text top="1022" left="391" width="29" height="13" font="1">Պատ</text>
+<text top="1024" left="421" width="2" height="12" font="3">․</text>
+<text top="1022" left="423" width="10" height="13" font="1">՝1</text>
+<text top="1025" left="433" width="3" height="11" font="2"> </text>
+<text top="1053" left="433" width="5" height="15" font="4"> </text>
+<text top="1086" left="66" width="5" height="16" font="5"> </text>
+<text top="795" left="459" width="344" height="13" font="1">Երկկողմ երթեւեկությամբ գծանշված ճանապարհներին, երեք </text>
+<text top="810" left="459" width="351" height="13" font="1">գոտու առկայության դեպքում  (բացառությամբ երթեւեկության </text>
+<text top="825" left="459" width="342" height="13" font="1">դարձափոխային կարգավորմամբ ճանապարհների), որոնցից </text>
+<text top="840" left="459" width="364" height="13" font="1">միջինն օգտագործվում է երկու ուղղություններով երթեւեկության </text>
+<text top="855" left="459" width="246" height="13" font="1">համար, ձախ եզրային գոտի մուտք գործելը՝ </text>
+<text top="884" left="643" width="3" height="11" font="2"> </text>
+<text top="909" left="459" width="667" height="13" font="1">1.Թույլատրվում է։                                                                                                                                                                          </text>
+<text top="924" left="459" width="666" height="13" font="1">2.Արգելվում է։                                                                                                                                                                                </text>
+<text top="939" left="459" width="303" height="13" font="1">3.Թույլատրվում է՝ միայն վազանցի, շրջանցման, ձախ  </text>
+<text top="953" left="459" width="227" height="13" font="1">շրջադարձի կամ հետադարձի համար։     </text>
+<text top="983" left="498" width="287" height="11" font="1">                                                                                      </text>
+<text top="980" left="785" width="29" height="13" font="1">Պատ</text>
+<text top="982" left="815" width="2" height="12" font="3">․</text>
+<text top="980" left="817" width="10" height="13" font="1">՝2</text>
+<text top="983" left="827" width="3" height="11" font="2"> </text>
+<text top="1011" left="827" width="5" height="15" font="4"> </text>
+<text top="1044" left="459" width="5" height="16" font="5"> </text>
+</page>
+
+</pdf2xml>
