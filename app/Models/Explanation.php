@@ -24,10 +24,10 @@ class Explanation extends Model
     public function translation($lang = null): HasOne
     {
         $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        return $this->hasOne(ExplanationTranslation::class)
-            ->when($language, function ($query) use ($language) {
-                $query->where('language_id', $language->id);
-            });
+        $relation = $this->hasOne(ExplanationTranslation::class);
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 }

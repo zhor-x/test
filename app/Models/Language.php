@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
@@ -39,6 +40,33 @@ class Language extends Model
         }
 
         return self::$resolvedCache[$normalized];
+    }
+
+    public static function fallback(): ?self
+    {
+        return self::resolveByCode(config('app.fallback_locale'));
+    }
+
+    public static function applyTranslationScope(Builder $query, ?self $preferred, ?self $fallback = null): Builder
+    {
+        if ($preferred && $fallback && $preferred->id !== $fallback->id) {
+            $query->where(function (Builder $nested) use ($preferred, $fallback) {
+                $nested->where('language_id', $preferred->id)
+                    ->orWhere('language_id', $fallback->id);
+            })->orderByRaw('language_id = ? desc', [$preferred->id]);
+
+            return $query;
+        }
+
+        if ($preferred) {
+            return $query->where('language_id', $preferred->id);
+        }
+
+        if ($fallback) {
+            return $query->where('language_id', $fallback->id);
+        }
+
+        return $query;
     }
 
     public function examTestTranslations()

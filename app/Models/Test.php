@@ -16,11 +16,11 @@ class Test extends Model
     public function translation(): HasOne
     {
         $language = Language::resolveByCode(app()->getLocale());
+        $fallback = Language::fallback();
 
-        return $this->hasOne(TestTranslation::class)
-            ->when($language, function ($query) use ($language) {
-                $query->where('language_id', $language->id);
-            });
+        $relation = $this->hasOne(TestTranslation::class);
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 
     public function questions(): BelongsToMany

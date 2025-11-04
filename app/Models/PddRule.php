@@ -15,10 +15,10 @@ class PddRule extends Model
     public function translation($lang = null): HasOne
     {
         $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        return $this->hasOne(PddRuleTranslation::class, 'rule_id')
-            ->when($language, function ($query) use ($language) {
-                $query->where('language_id', $language->id);
-            });
+        $relation = $this->hasOne(PddRuleTranslation::class, 'rule_id');
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 }

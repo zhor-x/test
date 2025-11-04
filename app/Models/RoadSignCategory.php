@@ -11,11 +11,11 @@ class RoadSignCategory extends Model
     public function translation($lang = null): HasOne
     {
         $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        return $this->hasOne(RoadSignCategoryTranslation::class, 'road_sign_category_id')
-            ->when($language, function ($query) use ($language) {
-                $query->where('language_id', $language->id);
-            });
+        $relation = $this->hasOne(RoadSignCategoryTranslation::class, 'road_sign_category_id');
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 
     public function roadSings(): HasMany

@@ -34,11 +34,10 @@ class ExamTestRepository implements ExamTestRepositoryInterface
     public function findByUniqueId(string $uniqueId, ?string $locale = null)
     {
         $language = Language::resolveByCode($locale ?? app()->getLocale());
+        $fallback = Language::fallback();
 
-        $applyTranslationScope = function ($query) use ($language) {
-            $query->when($language, function ($query) use ($language) {
-                $query->where('language_id', $language->id);
-            });
+        $applyTranslationScope = function ($query) use ($language, $fallback) {
+            Language::applyTranslationScope($query, $language, $fallback);
         };
 
         return UserExamTest::where('unique_id', $uniqueId)

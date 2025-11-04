@@ -22,10 +22,10 @@ class Group extends Model
     public function translation($lang = null): HasOne
     {
         $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        return $this->hasOne(GroupTranslation::class, 'group_id')
-            ->when($language, function ($query) use ($language) {
-                $query->where('language_id', $language->id);
-            });
+        $relation = $this->hasOne(GroupTranslation::class, 'group_id');
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 }

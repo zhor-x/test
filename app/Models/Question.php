@@ -27,9 +27,11 @@ class Question extends Model
     public function translation($lang = null)
     {
         $language = Language::resolveByCode($lang ?: app()->getLocale());
+        $fallback = Language::fallback();
 
-        return $this->hasOne(QuestionTranslation::class, 'question_id', 'id')
-            ->when($language, fn($q) => $q->where('language_id', $language->id));
+        $relation = $this->hasOne(QuestionTranslation::class, 'question_id', 'id');
+
+        return Language::applyTranslationScope($relation, $language, $fallback);
     }
 
     public function translationCommand()
