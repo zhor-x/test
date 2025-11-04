@@ -3,6 +3,7 @@
 namespace App\Repositories\Api\V1;
 
 use App\Enums\UserRole;
+use App\Models\Language;
 use App\Models\Test;
 use App\Models\UserExamTest;
 use Illuminate\Database\Eloquent\Collection;
@@ -30,15 +31,41 @@ class ExamTestRepository implements ExamTestRepositoryInterface
         return $examTests->get();
     }
 
-    public function findByUniqueId(string $uniqueId)
+    public function findByUniqueId(string $uniqueId, ?string $locale = null)
     {
+        $language = Language::resolveByCode($locale ?? app()->getLocale());
+
+        $applyTranslationScope = function ($query) use ($language) {
+            $query->when($language, function ($query) use ($language) {
+                $query->where('language_id', $language->id);
+            });
+        };
+
         return UserExamTest::where('unique_id', $uniqueId)
             ->with([
-                'examTest.questions.translation',
-                'examTest.questions.answers.translation',
-                'examTest.questions.explanation.translation',
-                'examTest.questions',
-             ])
+                'examTest' => function ($examTestQuery) use ($applyTranslationScope) {
+                    $examTestQuery->with([
+                        'translation' => $applyTranslationScope,
+                        'questions' => function ($questionQuery) use ($applyTranslationScope) {
+                            $questionQuery->with([
+                                'translation' => $applyTranslationScope,
+                                'answers' => function ($answerQuery) use ($applyTranslationScope) {
+                                    $answerQuery->with(['translation' => $applyTranslationScope]);
+                                },
+                                'explanation' => function ($explanationQuery) use ($applyTranslationScope) {
+                                    $explanationQuery->with(['translation' => $applyTranslationScope]);
+                                },
+                                'group' => function ($groupQuery) use ($applyTranslationScope) {
+                                    $groupQuery->with(['translation' => $applyTranslationScope]);
+                                },
+                            ]);
+                        },
+                    ]);
+                },
+                'questions' => function ($query) {
+                    $query->with(['question', 'answer']);
+                },
+            ])
             ->first();
     }
 
@@ -59,10 +86,15 @@ class ExamTestRepository implements ExamTestRepositoryInterface
             ->get();
     }
 
-    public function getTestByUuId(string $uniqueId)
+    public function getTestByUuId(string $uniqueId, ?string $locale = null)
     {
         $user = auth('api')->user();
-        $test = $this->findByUniqueId($uniqueId);
+        $test = $this->findByUniqueId($uniqueId, $locale);
+
+        if (!$test) {
+            return null;
+        }
+
         $test->load('questions');
 
         if ($user &&($user->role !== UserRole::ADMIN->value && $test->user_id !== $user->id)) {

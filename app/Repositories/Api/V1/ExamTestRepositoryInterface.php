@@ -9,12 +9,12 @@ interface ExamTestRepositoryInterface
 {
     public function getAllWithTranslations(): Collection;
 
-    public function findByUniqueId(string $uniqueId);
+    public function findByUniqueId(string $uniqueId, ?string $locale = null);
 
     public function getById(int $testId): Test;
 
     public function getByUserId(int $userId);
 
-    public function getTestByUuId(string $uniqueId);
+    public function getTestByUuId(string $uniqueId, ?string $locale = null);
 
 }
