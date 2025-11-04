@@ -16,9 +16,9 @@ class QuestionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'text' => $this->translation->title,
+            'text' => $this->translation?->title,
             'image' => $this->image,
-            'group' => $this->group->translation->title,
+            'group' => $this->group?->translation?->title,
             'category_id' => $this->group_id,
             'exam' => '',
             'answers' => AnswerResource::collection($this->whenLoaded('answers')),

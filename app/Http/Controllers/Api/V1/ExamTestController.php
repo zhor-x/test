@@ -31,7 +31,7 @@ class ExamTestController
 
     public function testByUuId(string $lang, string $testUuid): UserTestResource
     {
-        return new UserTestResource($this->service->getTestByUuId($testUuid));
+        return new UserTestResource($this->service->getTestByUuId($testUuid, $lang));
     }
 
     public function index(): JsonResponse

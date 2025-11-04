@@ -35,7 +35,12 @@ class AutoTranslatePosts extends Command
      */
     public function handle()
     {
-        $language = Language::query()->where('country_code', 'hy')->first();
+        $language = Language::resolveByCode('hy');
+
+        if (!$language) {
+            $this->error('Base language not found.');
+            return Command::FAILURE;
+        }
 
 
         $this->RoadSignCategories($language);
@@ -44,6 +49,7 @@ class AutoTranslatePosts extends Command
         $this->pddRulesChapters($language);
         $this->group();
 
+        return Command::SUCCESS;
     }
 
     private function RoadSignCategories(Language $language)

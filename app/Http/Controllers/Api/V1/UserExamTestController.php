@@ -20,7 +20,7 @@ class UserExamTestController extends Controller
     public function show(string $lang, string $uniqueId): JsonResponse
     {
         try {
-            $userExamTest = $this->service->getUserExamTestByUniqueId($uniqueId);
+            $userExamTest = $this->service->getUserExamTestByUniqueId($uniqueId, $lang);
 
             if (!$userExamTest) {
                 return response()->json(['error' => 'User exam test not found'], 404);
@@ -43,7 +43,7 @@ class UserExamTestController extends Controller
 
             $validated = $request->validated();
 
-            $userExamTest = $this->service->submitAnswer($uniqueId, $validated);
+            $userExamTest = $this->service->submitAnswer($uniqueId, $validated, $lang);
 
             if (!$userExamTest) {
                 return response()->json(['error' => 'User exam test not found'], 404);
@@ -59,10 +59,10 @@ class UserExamTestController extends Controller
         }
     }
 
-    public function submitFinal(string $uniqueId)
+    public function submitFinal(string $lang, string $uniqueId)
     {
         try {
-            $this->service->submitFinal($uniqueId);
+            $this->service->submitFinal($uniqueId, $lang);
         } catch (Exception $e) {
             Log::error('Error submitting answer: ' . $e->getMessage());
             return response()->json(['error' => 'Internal server error'], 500);
