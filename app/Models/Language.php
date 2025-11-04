@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use InvalidArgumentException;
 
 class Language extends Model
 {
@@ -47,10 +49,22 @@ class Language extends Model
         return self::resolveByCode(config('app.fallback_locale'));
     }
 
-    public static function applyTranslationScope(Builder $query, ?self $preferred, ?self $fallback = null): Builder
+    /**
+     * Apply preferred/fallback language constraints to a translation query or relation.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation  $query
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public static function applyTranslationScope($query, ?self $preferred, ?self $fallback = null)
     {
+        if (!$query instanceof Builder && !$query instanceof Relation) {
+            throw new InvalidArgumentException('Translation scope expects a Builder or Relation instance.');
+        }
+
+        $builder = $query instanceof Relation ? $query->getQuery() : $query;
+
         if ($preferred && $fallback && $preferred->id !== $fallback->id) {
-            $query->where(function (Builder $nested) use ($preferred, $fallback) {
+            $builder->where(function ($nested) use ($preferred, $fallback) {
                 $nested->where('language_id', $preferred->id)
                     ->orWhere('language_id', $fallback->id);
             })->orderByRaw('language_id = ? desc', [$preferred->id]);
@@ -59,11 +73,15 @@ class Language extends Model
         }
 
         if ($preferred) {
-            return $query->where('language_id', $preferred->id);
+            $builder->where('language_id', $preferred->id);
+
+            return $query;
         }
 
         if ($fallback) {
-            return $query->where('language_id', $fallback->id);
+            $builder->where('language_id', $fallback->id);
+
+            return $query;
         }
 
         return $query;
